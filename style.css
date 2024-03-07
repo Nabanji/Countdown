@@ -62,7 +62,7 @@ form button {
 
 .countdown-container {
     background: #fff;
-    width: fit-content;
+    width: 450px;
     height: 300px;
     display: none;
     flex-direction: column;
@@ -94,7 +94,7 @@ form button {
 
 @media screen and (max-width: 767px) {
     .container {
-        width: 400px;
+        width: 350px;
         height: 250px;
         background-color: #fff;
         border-radius: 8px;
@@ -114,8 +114,8 @@ form button {
 
     .countdown-container {
         background: #fff;
-        width: fit-content;
-        height: 300px;
+        width: 350px;
+        height: 250px;
     }
 
     .countdown-container h1 .event-value {
