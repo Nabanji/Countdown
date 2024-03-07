@@ -13,30 +13,51 @@ const countdownContainer = document.querySelector(".countdown-container");
 // Submit button Selector
 const submitBtn = document.querySelector("#submit-btn");
 
+// Reset button selector
+const resetBtn = document.querySelector("#reset-btn");
+
 // Selector for event entered by the user
 let reminder = document.querySelector(".event-value");
 
-// Setting the months and days arrays 
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+// Selectors for displaying the time remaining
+const dys = document.getElementById("days");
+const hours = document.getElementById("hours");
+const mins = document.getElementById("minutes");
+const seconds = document.getElementById("seconds");
 
-const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+// Function to update the countdown timer
+function updateCountdown() {
+    const eventDateTime = new Date(eventTime.value);
+    const currentTime = new Date();
 
+    const difference = eventDateTime - currentTime;
+
+    if (difference <= 0) {
+        window.alert("The time you entered has already been reached");
+        window.alert("Enter a new event time");
+        mainContainer.style.display = "flex";
+        countdownContainer.style.display = "none";
+        eventTime.value = "";
+        console.clear();
+
+    }
+    else {
+        const daysRemaining = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hoursRemaining = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minsRemaining = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const secsRemaining = Math.floor((difference % (1000 * 60)) / 1000);
+
+        dys.textContent = daysRemaining + "d:";
+        hours.textContent = hoursRemaining + "h:";
+        mins.textContent = minsRemaining + "m:";
+        seconds.textContent = secsRemaining + "s";
+    }
+}
 
 //Button event handling and functionality
 submitBtn.addEventListener("click", (e) => {
     // preventing the page from reloading once someone submits
     e.preventDefault();
-
-    const date = new Date();
-    let m = date.getMonth();
-    let d = date.getDay();
-    let h = date.getHours();
-    let mins = date.getMinutes();
-    let s = date.getSeconds();
-
-    console.log(eventTime.value);
-    console.log(h);
-    console.log(parseInt(h - eventTime.value));
 
     if (eventName.value.length <= 0 || eventTime.value.length <= 0) {
         if (eventName.value.length <= 0) {
@@ -49,27 +70,37 @@ submitBtn.addEventListener("click", (e) => {
         // Setting the content of the reminder and the styles to be applied
         reminder.textContent = eventName.value;
         reminder.style.marginBottom = "20px";
-        reminder.style.fontSize = "2rem";
         reminder.style.color = "orangered";
 
         // Displaying the countdown container
         countdownContainer.style.display = "flex";
         // Hiding the main container
         mainContainer.style.display = "none";
+
+        // Update the countdown initially
+        updateCountdown();
+
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
     }
 
 })
 
-// Reset button selector
-const resetBtn = document.querySelector("#reset-btn");
 
 // Setting the reset event handling and functionality
 resetBtn.addEventListener("click", () => {
+    // clearing the console
+    console.clear();
+
+    // Stop displaying the countdown container
+    countdownContainer.style.display = "none";
+
     // Displaying the main container
     mainContainer.style.display = "flex";
 
-    // Hiding the countdown container
-    countdownContainer.style.display = "none";
+    // Clear the countdown interval
+    clearInterval(countdownInterval);
+
 })
 
 // Event entered by the user selector

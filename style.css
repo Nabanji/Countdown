@@ -26,10 +26,6 @@ body {
     border-radius: 8px;
 }
 
-.container .no-events {
-    display: none;
-    color: red;
-}
 
 form {
     width: 100%;
@@ -80,14 +76,6 @@ form button {
     font-size: 1.3rem;
 }
 
-/*
-.countdown-container .event-value {
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: orangered;
-}
-*/
-
 .countdown-container #event-countdown {
     font-size: 2.2rem;
     color: orangered;
@@ -102,4 +90,49 @@ form button {
     background: orangered;
     border-radius: 2px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+    .container {
+        width: 400px;
+        height: 250px;
+        background-color: #fff;
+        border-radius: 8px;
+    }
+
+    form input {
+        width: 70%;
+        height: 30px;
+        padding-left: 6px;
+    }
+
+    form button {
+        width: 70%;
+        height: 25px;
+        font-size: 14px;
+    }
+
+    .countdown-container {
+        background: #fff;
+        width: fit-content;
+        height: 300px;
+    }
+
+    .countdown-container h1 .event-value {
+        font-size: 1rem;
+    }
+
+    .countdown-container .event-value {
+        font-size: 1.5rem;
+    }
+
+    .countdown-container #event-countdown span {
+        font-size: 1.7rem;
+    }
+
+    .countdown-container button {
+        width: 35%;
+        height: 25px;
+        font-size: .8rem;
+    }
 }
